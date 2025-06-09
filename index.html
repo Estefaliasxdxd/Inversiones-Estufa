@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gastos de Junio</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #d8f3dc, #cce5ff, #e0bbf4);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .header {
+      text-align: center;
+      padding: 2rem;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-bottom: 4px solid #a5d8ff;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #2b2d42;
+      margin: 0;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    .blob1 {
+      width: 400px;
+      height: 400px;
+      background: #a8dadc;
+      top: -100px;
+      left: -100px;
+    }
+
+    .blob2 {
+      width: 300px;
+      height: 300px;
+      background: #cdb4db;
+      bottom: -80px;
+      right: -80px;
+    }
+
+    .blob3 {
+      width: 250px;
+      height: 250px;
+      background: #b5ead7;
+      top: 300px;
+      right: 150px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background-color: #ffffffcc;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .slider-label {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #2b2d42;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .percentage-display {
+      font-size: 1.5rem;
+      color: #264653;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .amount-display {
+      text-align: center;
+      margin-top: 0.5rem;
+      color: #4d4d4d;
+    }
+  </style>
+</head>
+<body>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <div class="header">
+    <h1>Gastos de Junio</h1>
+  </div>
+
+  <div class="container">
+    <div class="slider-label">Inversión actual</div>
+    <input type="range" id="investmentSlider" min="0" max="1000000" value="50000" step="1000" />
+    <div class="percentage-display" id="percentage"></div>
+    <div class="amount-display" id="amount"></div>
+  </div>
+
+  <script>
+    const slider = document.getElementById("investmentSlider");
+    const percentageDisplay = document.getElementById("percentage");
+    const amountDisplay = document.getElementById("amount");
+
+    function updateDisplay(value) {
+      const max = parseInt(slider.max);
+      const percent = ((value / max) * 100).toFixed(2);
+      percentageDisplay.textContent = percent + "% invertido";
+      amountDisplay.textContent = "$" + parseInt(value).toLocaleString("es-AR") + " / $1.000.000";
+    }
+
+    slider.addEventListener("input", function () {
+      updateDisplay(this.value);
+    });
+
+    updateDisplay(slider.value);
+  </script>
+</body>
+</html>
