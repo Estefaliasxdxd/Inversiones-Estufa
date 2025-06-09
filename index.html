@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Cuentos Random</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f, #c1f0f6, #e0bbff);
+      background-size: 600% 600%;
+      animation: bgmove 20s ease infinite;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+
+    @keyframes bgmove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      color: #ff66b2;
+      margin-bottom: 10px;
+    }
+
+    form {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #a0e0ff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cuento {
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      text-align: justify;
+    }
+
+    .decoraciones {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      width: 100px;
+    }
+
+    .decoraciones img {
+      width: 100%;
+      display: block;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Generador de Cuentos Random 🌈📖</h1>
+  <form onsubmit="generarCuento(event)">
+    <input type="text" id="titulo" placeholder="Título del cuento" required>
+    <input type="text" id="serVivo" placeholder="Ser vivo (ej: dragón, vaca, alien)">
+    <input type="text" id="objeto" placeholder="Objeto (ej: tostadora, mochila mágica)">
+    <input type="text" id="tema" placeholder="Situación o tema (ej: viaje en el tiempo)">
+    <button type="submit">Generar cuento</button>
+  </form>
+
+  <div class="cuento" id="cuentoGenerado"></div>
+
+  <div class="decoraciones">
+    <img src="https://upload.wikimedia.org/wikipedia/en/0/0c/Gumball_Watterson.png" alt="Gumball">
+    <img src="https://upload.wikimedia.org/wikipedia/en/d/dc/Cosmo_and_Wanda.png" alt="Padrinos mágicos">
+    <img src="https://upload.wikimedia.org/wikipedia/en/7/7e/SpongeBob_SquarePants_character.svg" alt="Bob Esponja">
+    <img src="https://upload.wikimedia.org/wikipedia/en/9/9b/Finn_the_Human.png" alt="Finn">
+  </div>
+
+  <script>
+    function generarCuento(event) {
+      event.preventDefault();
+
+      const titulo = document.getElementById('titulo').value;
+      const serVivo = document.getElementById('serVivo').value || 'un ser misterioso';
+      const objeto = document.getElementById('objeto').value || 'un objeto mágico';
+      const tema = document.getElementById('tema').value || 'una aventura inesperada';
+
+      const rareza = Math.floor(Math.random() * 10000);
+      const girosLocos = [
+        'una nube se volvió inteligente y decidió dominar el mundo',
+        'el tiempo empezó a correr hacia atrás mientras todos bailaban',
+        'un plátano cobró vida y se convirtió en presidente',
+        'apareció una dimensión hecha de gelatina',
+        'una tostadora voladora salvó al planeta',
+        'todos los relojes comenzaron a hablar entre ellos',
+        'una canción mágica obligaba a todos a decir la verdad',
+        'se abrió un portal en la heladera y salieron pingüinos de fuego'
+      ];
+
+      const giro = girosLocos[rareza % girosLocos.length];
+
+      const cuento = `
+        <h2>${titulo}</h2>
+        <p>Había una vez ${serVivo} que encontró ${objeto} en medio de ${tema}. Lo que no sabía era que ${giro}. Desde ese momento, todo cambió para siempre. Y así comenzó una historia que nadie podría haber imaginado... excepto vos.</p>
+      `;
+
+      document.getElementById('cuentoGenerado').innerHTML = cuento;
+    }
+  </script>
+</body>
+</html>
